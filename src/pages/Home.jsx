@@ -8,7 +8,7 @@ import "../styles/home.css"
 import { Container,Row,Col } from 'reactstrap';
 import heroImg from "../assets/images/hero-img.png"
 import Services from '../services/Services';
-
+import ProductList from '../components/UI/ProductList';
 
 
 
@@ -46,8 +46,8 @@ const Home = () => {
         <Row>
         <Col lg='12' className='text-center'>
           <h2 className="section__title">Trending Products</h2>
-        </Col>
-          
+        </Col>    
+        <ProductList/>      
         </Row>
       </Container>
     </section>
