@@ -11,7 +11,7 @@ const Footer = () => {
     <footer className="footer">
       <Container>
         <Row>
-           <Col lg="4">
+           <Col lg="4" className ='mb-4' md='6'>
             <div className="logo">
               
               <div>
@@ -24,7 +24,7 @@ const Footer = () => {
               </p>            
            </Col>
 
-           <Col lg="3">
+           <Col lg="3" md='3' className='mb-4'>
             <div className="footer__quick-links">
               <h4 className="quick__links-title">Top Categories</h4>
 
@@ -50,7 +50,7 @@ const Footer = () => {
            </Col>
 
 
-           <Col lg="2">
+           <Col lg="2" className='mb-4'>
             <div className="footer__quick-links">
               <h4 className="quick__links-title">Useful Links</h4>
 
@@ -82,7 +82,7 @@ const Footer = () => {
 
                 <ListGroupItem className='ps-0 border-0 d-flex align-items-center gap-2'>
                   <span><i class="ri-map-pin-line"></i></span>
-                  <p>099Lal Bangla,Kanpur</p>
+                  <p>99 Lal Bangla,Kanpur</p>
                 </ListGroupItem>
 
                 <ListGroupItem className='ps-0 border-0 d-flex align-items-center gap-2'>
@@ -92,7 +92,7 @@ const Footer = () => {
 
                 <ListGroupItem className='ps-0 border-0 d-flex align-items-center gap-2' >
                 <span><i class="ri-mail-line"></i></span>
-                  <p>rajpootabhay@123.gmail.com</p>
+                  <p>rajpootabhay423@.gmail.com</p>
                 </ListGroupItem>
 
                 
