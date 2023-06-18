@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { Col } from 'reactstrap';
 import '../../styles/product-card.css'
 import { Link } from 'react-router-dom';
+import { ToastContainer,toast } from 'react-toastify';
 
 import { useDispatch } from 'react-redux';
 import { cartActions } from '../../redux/slices/cartSlice';

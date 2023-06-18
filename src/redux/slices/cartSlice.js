@@ -39,6 +39,7 @@ const cartSlice = createSlice({
         Number(item.price) * Number(item.quantity))
         console.log(state.totalQuantity);
         console.log(state.cartItems);
+        console.log(newItem);
     },
   },
 });
