@@ -5,10 +5,29 @@ import Helmet from  '../components/Helmet/Helmet';
 import { Col, Container, Row } from 'reactstrap';
 import '../styles/shop.css';
 import products from '../assets/data/products'
+import ProductList from '../components/UI/ProductList'
 
 
 
 const Shop = () => {
+
+  const [productsData,setProductsData] = useState(products)
+
+
+  const handleFilter = e => {
+      const filterValue = e.target.value
+      if(filterValue === "sofa") {
+        const filteredProducts = products.filter(
+          (item) => item.category === "sofa"
+        );
+
+
+        setProductsData(filteredProducts);
+      }
+  };
+
+
+
   return(
      <Helmet title = 'Shop'>
       <CommonSection title='Products' />
@@ -18,7 +37,7 @@ const Shop = () => {
           <Row>
           <Col lg='3' md='3'>
             <div className="filter__widget">
-              <select >
+              <select onChange={handleFilter}>
                 <option >Filter By Category</option>
                 <option value="sofa">Sofa</option>
                 <option value="mobile">Mobile</option>
