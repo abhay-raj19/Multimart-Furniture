@@ -16,6 +16,8 @@ const Shop = () => {
 
   const handleFilter = e => {
       const filterValue = e.target.value
+
+
       if(filterValue === "sofa") {
         const filteredProducts = products.filter(
           (item) => item.category === "sofa"
@@ -24,6 +26,47 @@ const Shop = () => {
 
         setProductsData(filteredProducts);
       }
+
+
+      if(filterValue === "mobile") {
+        const filteredProducts = products.filter(
+          (item) => item.category === "mobile"
+        );
+
+
+        setProductsData(filteredProducts);
+      }
+
+
+      if(filterValue === "wireless") {
+        const filteredProducts = products.filter(
+          (item) => item.category === "wireless"
+        );
+
+
+        setProductsData(filteredProducts);
+      }
+
+
+      if(filterValue === "chair") {
+        const filteredProducts = products.filter(
+          (item) => item.category === "chair"
+        );
+
+
+        setProductsData(filteredProducts);
+      }
+
+
+      if(filterValue === "watch") {
+        const filteredProducts = products.filter(
+          (item) => item.category === "watch"
+        );
+
+
+        setProductsData(filteredProducts);
+      }
+      
   };
 
 
@@ -65,6 +108,15 @@ const Shop = () => {
             </div>
           </Col>
           </Row>         
+        </Container>
+      </section>
+      <section>
+        <Container>
+          <Row>
+            {
+              productsData.length === 0 ? (<h1>No Products are Found!</h1>) : (<ProductList data={productsData} />)
+            }
+          </Row>
         </Container>
       </section>
     </Helmet>
