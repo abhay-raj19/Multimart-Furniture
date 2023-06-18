@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import CommonSection from '../components/UI/CommonSection';
 import Helmet from  '../components/Helmet/Helmet';
 import { Col, Container, Row } from 'reactstrap';
 import '../styles/shop.css';
+import products from '../assets/data/products'
 
 
 
