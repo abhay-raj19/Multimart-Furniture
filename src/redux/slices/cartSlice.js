@@ -37,10 +37,12 @@ const cartSlice = createSlice({
         }
         state.totalAmount = state.cartItems.reduce((total,item) => total + 
         Number(item.price) * Number(item.quantity))
+        console.log(state.totalQuantity);
+        console.log(state.cartItems);
     },
   },
 });
 
-export const {} = cartSlice.actions
+export const cartActions = cartSlice.actions;
 
-export default cartSlice.reducer
+export default cartSlice.reducer;
