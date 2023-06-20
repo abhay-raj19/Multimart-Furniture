@@ -1,6 +1,6 @@
 import React, { useRef,useEffect } from 'react'
 
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import './header.css'
 
 import { motion } from 'framer-motion'
@@ -66,9 +66,9 @@ const Header = () => {
                 <Row>
                     <div className="nav__wrapper">
                         <div className="logo">
-                            <img src={logo} alt="Logo" />
+                        <Link to="/home"><img src={logo} alt="Logo" /></Link>                            
                             <div>
-                                <h1>Marketopolis</h1>
+                                <Link to='/home'><h1>Marketopolis</h1></Link>
 
                             </div>
                         </div>
