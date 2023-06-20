@@ -69,6 +69,13 @@ const Shop = () => {
       
   };
 
+  const handleSearch = e => {
+    const searchTerm = e.target.value
+    const searchedProducts = products.filter(item =>item.productName.toLowerCase().includes(searchTerm.toLowerCase()))
+
+
+    setProductsData(searchedProducts)
+  }
 
 
   return(
@@ -101,7 +108,7 @@ const Shop = () => {
           </Col>
           <Col lg='3' md='3'>
             <div className="search__box">
-              <input type="text" placeholder='Search....' />
+              <input type="text" placeholder='Search....' onChange={handleSearch} />
               <span>
                 <i class="ri-search-line"></i>
               </span>
@@ -110,7 +117,7 @@ const Shop = () => {
           </Row>         
         </Container>
       </section>
-      <section>
+      <section className='pt-0'>
         <Container>
           <Row>
             {
