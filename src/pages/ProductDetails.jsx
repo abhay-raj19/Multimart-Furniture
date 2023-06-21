@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useRef } from 'react'
 import { useParams } from 'react-router-dom'
 import { Container, Row, Col } from 'reactstrap'
 import products from '../assets/data/products'
@@ -6,10 +6,18 @@ import Helmet from '../components/Helmet/Helmet'
 import CommonSection from '../components/UI/CommonSection'
 import '../styles/product-details.css'
 import { motion } from 'framer-motion'
+import ProductList from "../components/UI/ProductList"
+import { useDispatch } from 'react-redux'
+import { cartActions } from '../redux/slices/cartSlice'
 
 
 const ProductDetails = () => {
   const [ tab , setTab] = useState('desc')
+  const reviewUser=useRef('')
+  const reviewMsg =useRef('')
+  const dispatch = useDispatch()
+
+  const [rating, setRating] = useState(null);
   const { id } = useParams();
   const product = products.find(item => item.id === id)
 
@@ -20,8 +28,17 @@ const ProductDetails = () => {
     avgRating,
     reviews, 
     description,
-    shortDesc 
+    shortDesc ,
+    category ,
   } = product;
+
+  const relatedProducts = products.filter(item=>item.category===category);
+  const submitHandler = (e) =>{
+    e.preventDefault()
+    const reviewUserName = reviewUser.current.value 
+    const reviewUserMsg = reviewMsg.current.value 
+  };
+  
   return (
     <Helmet title={productName}>
       <CommonSection title={productName}/>
@@ -37,15 +54,18 @@ const ProductDetails = () => {
                 <h2>{productName}</h2>
                 <div className="product_rating d-flex align-items-center mb-3">
                   <div>
-                    <span><i class="ri-star-s-fill"></i></span>
-                    <span><i class="ri-star-s-fill"></i></span>
-                    <span><i class="ri-star-s-fill"></i></span>
-                    <span><i class="ri-star-s-fill"></i></span>
-                    <span><i class="ri-star-half-s-line"></i></span>
+                    <span onClick={()=>setRating(1)} ><i class="ri-star-s-fill"></i></span>
+                    <span onClick={()=>setRating(2)}><i class="ri-star-s-fill"></i></span>
+                    <span onClick={()=>setRating(3)}><i class="ri-star-s-fill"></i></span>
+                    <span onClick={()=>setRating(4)}><i class="ri-star-s-fill"></i></span>
+                    <span onClick={()=>setRating(5)}><i class="ri-star-half-s-line"></i></span>
                   </div>
                   <p>(<span>{avgRating}</span>ratings)</p>
                 </div>
+                <div className='d-flex align-items-center gap-5'>
                 <span className='product__price'>${price}</span>
+                <span>Category :{category}</span>
+                </div>
                 <p className='mt-3'>{shortDesc}</p>
                 <motion.button whileTap={{scale:1.2}} className="buy__btn">Add to Cart</motion.button>
 
@@ -85,10 +105,10 @@ const ProductDetails = () => {
                           ))}
                       </ul>
                       <div className="review__form">
-                      <h4>Leave Your Application</h4>
-                        <form action="">
+                      <h4>Leave Your Experience</h4>
+                        <form action="" onSubmit={submitHandler}>
                           <div className="form__group">
-                            <input type="text" placeholder='Enter Name' />
+                            <input type="text" placeholder='Enter Name'  ref={reviewUser} />
                           </div>
 
                         <div className="form__group d-flex align-items-center gap-5">
@@ -101,8 +121,9 @@ const ProductDetails = () => {
                         </div>
 
                         <div className="form__group">
-                          <textarea rows={4} type="text" placeholder='Review Message...' />
+                          <textarea rows={4} ref={reviewMsg} type="text" placeholder='Review Message...' />
                         </div>
+                        <button type="submit" className="buy__btn">Submit</button>
 
                         </form>
                       </div>
@@ -110,6 +131,10 @@ const ProductDetails = () => {
                   </div>
                 )}
             </Col>
+            <Col lg='12' className='mt-5'>
+              <h2 className='related__title'> You might also like</h2>
+            </Col>
+            <ProductList data={relatedProducts}/>
           </Row>
         </Container>
       </section>

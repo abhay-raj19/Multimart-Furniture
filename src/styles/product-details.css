@@ -76,3 +76,8 @@ ul{
     margin: 0;
     padding: 0;
 }
+.related__title{
+    font-size: 1.2rem;
+    font-weight: 600;
+    
+}
