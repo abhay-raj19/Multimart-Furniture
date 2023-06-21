@@ -59,20 +59,62 @@ const ProductDetails = () => {
           <Row>
             <Col lg='12' >
               <div className="tab__wrapper d-flex align-items-center gap-5">
-                <h6 className={`${tab==="desc" ? "active__tab" : ""}`}
-                >Description</h6>
-                <h6 className={`${tab==="rev" ? "active__tab" : ""}`}
-                >Reviews ({reviews.length})</h6>
+                <h6 className={`${ tab === "desc" ? "active__tab" : ""}`}
+                 onClick={() => setTab('desc')}>Description</h6>
+                <h6 className={`${ tab === "rev" ? "active__tab" : ""}`}
+                 onClick={() => setTab('rev')}>Reviews ({reviews.length})</h6>
               </div>
-              <div className="tab__content mt-5">
-                <p>{description}</p>
-              </div>
+
+
+              {
+                tab === "desc" ? (
+                  <div className="tab__content mt-5">
+                    <p>{description}</p>
+                  </div>
+                ) :(
+                  <div className="product__review">
+                    <div className="review__wrapper">
+                      <ul className='jur'>
+                        
+                      { reviews ?.map((item ,index) => (
+                            <li kew = {index} className='mb-4 mt-4 '>
+                            <h6 className='mb-2'>Mahesh Dhalle</h6>
+                              <span>{item.rating} ( rating)</span>
+                              <p>{item.text}</p>
+                            </li>
+                          ))}
+                      </ul>
+                      <div className="review__form">
+                      <h4>Leave Your Application</h4>
+                        <form action="">
+                          <div className="form__group">
+                            <input type="text" placeholder='Enter Name' />
+                          </div>
+
+                        <div className="form__group d-flex align-items-center gap-5">
+                          <span>1<i class="ri-star-s-fill"></i></span>
+                          <span>2<i class="ri-star-s-fill"></i></span>
+                          <span>3<i class="ri-star-s-fill"></i></span>
+                          <span>4<i class="ri-star-s-fill"></i></span>
+                          <span>5<i class="ri-star-s-fill"></i></span>
+
+                        </div>
+
+                        <div className="form__group">
+                          <textarea rows={4} type="text" placeholder='Review Message...' />
+                        </div>
+
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                )}
             </Col>
           </Row>
         </Container>
       </section>
     </Helmet>
-  )
-}
+  );
+};
 
-export default ProductDetails
+export default ProductDetails;
