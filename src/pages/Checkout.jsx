@@ -2,6 +2,7 @@ import React from 'react'
 import { Col, Container, Form, FormGroup, Row } from 'reactstrap'
 import Helmet from '../components/Helmet/Helmet'
 import CommonSection from '../components/UI/CommonSection'
+import '../styles/checkout.css'
 
 
 const Checkout = () => {
@@ -44,7 +45,22 @@ const Checkout = () => {
               </Form>
             </Col>
 
-            <Col lg='4'></Col>
+            <Col lg='4'>
+              <div className="checkout__cart">
+                <h6>Total Qty : <span>0</span></h6>
+                <h6>Subtotal : <span>$120</span></h6>
+
+                <h6>
+                <span>Shipping: <br />
+                (Free Shipping)
+                </span>
+                <span>$0</span></h6>
+        
+                <h4>Total Cost : <span>$120</span></h4>
+                <button className="buy__btn auth__btn w-100">Place an order</button>
+              </div>
+              
+            </Col>
           </Row>
         </Container>
       </section>
