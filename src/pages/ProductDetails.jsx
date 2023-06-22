@@ -123,7 +123,7 @@ const ProductDetails = () => {
                             <input type="text" placeholder='Enter Name'  ref={reviewUser} />
                           </div>
 
-                        <div className="form__group d-flex align-items-center gap-5">
+                        <div className="form__group d-flex align-items-center gap-5 rating__group">
                           <span>1<i class="ri-star-s-fill"></i></span>
                           <span>2<i class="ri-star-s-fill"></i></span>
                           <span>3<i class="ri-star-s-fill"></i></span>
