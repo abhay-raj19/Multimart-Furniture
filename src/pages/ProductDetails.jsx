@@ -9,6 +9,8 @@ import { motion } from 'framer-motion'
 import ProductList from "../components/UI/ProductList"
 import { useDispatch } from 'react-redux'
 import { cartActions } from '../redux/slices/cartSlice'
+import { toast } from 'react-toastify'
+
 
 
 const ProductDetails = () => {
@@ -37,6 +39,16 @@ const ProductDetails = () => {
     e.preventDefault()
     const reviewUserName = reviewUser.current.value 
     const reviewUserMsg = reviewMsg.current.value 
+  };
+  const addToCart = () => {
+    dispatch(cartActions.addItem({
+      id,
+      image:imgUrl,
+      productName,
+      price,
+      })
+      );
+      toast.success("Product added Sucessfully");
   };
   
   return (
@@ -67,7 +79,7 @@ const ProductDetails = () => {
                 <span>Category :{category}</span>
                 </div>
                 <p className='mt-3'>{shortDesc}</p>
-                <motion.button whileTap={{scale:1.2}} className="buy__btn">Add to Cart</motion.button>
+                <motion.button whileTap={{scale:1.2}} className="buy__btn" onClick={addToCart}>Add to Cart</motion.button>
 
               </div>
             </Col>
