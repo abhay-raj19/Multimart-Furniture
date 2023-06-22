@@ -50,11 +50,12 @@ const ProductDetails = () => {
   const addToCart = () => {
     dispatch(cartActions.addItem({
       id,
-      image:imgUrl,
+      imgUrl : imgUrl,
       productName,
       price,
       })
       );
+      console.log(imgUrl);
       toast.success("Product added Sucessfully");
   };
 
