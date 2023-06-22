@@ -3,15 +3,19 @@ import '../styles/cart.css'
 import Helmet from '../components/Helmet/Helmet'
 import CommonSection from '../components/UI/CommonSection';
 import { Col, Container, Row } from 'reactstrap';
-import tdImg from '../assets/images/arm-chair-01.jpg'
+// import tdImg from '../assets/images/arm-chair-01.jpg'
 import { motion } from 'framer-motion';
-import cartActions from '../redux/slices/cartSlice'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux'
+import { cartActions } from '../redux/slices/cartSlice'
+
+import { useSelector } from 'react-redux';
 
 
 
 const Cart = () => {
   const cartItems = useSelector(state => state.cart.cartItems)
+  
+  console.log(cartItems);
   return (
     <Helmet title="cart">
     <CommonSection title="shopping Cart" />
@@ -20,8 +24,8 @@ const Cart = () => {
         <Row>
           <Col lg= '9'>
           {
-            {/* cartItems.length === 0 ? (<h2 className='fs-4'>No item added to the Cart</h2>): */}
-          }
+            cartItems.length === 0 ? (<h2 className='fs-4 text-center'>No item added to the Cart</h2>
+          ): (
           <table className='table bordered'>
             <thead>
               <tr>
@@ -34,17 +38,13 @@ const Cart = () => {
             </thead>
 
             <tbody>
-              <tr>
-                <td> <img src={tdImg} alt="" />
-                </td>
-                <td>Modern Arm Chair</td>
-                <td>$299</td>
-                <td>2pcs</td>
-                <td><i class =" ri-delete-bin-line"></i></td>
-              </tr>
+              {
+                cartItems.map((item,index) => ( 
+                <Tr item={item} key={index}/>
+                ))}
             </tbody>
           </table>
-
+          )}
           </Col>
           <Col lg='3'>
 
@@ -57,4 +57,30 @@ const Cart = () => {
   )
 };
 
-export default Cart
+
+const Tr = ({item}) => {
+
+  const dispatch = useDispatch()
+  const deleteProduct = () => {
+  dispatch(cartActions.deleteItem(item.id))
+}
+
+  return (
+      <tr>
+        <td>
+         <img src={item.imgUrl} alt="" />
+        </td>
+        <td>{item.productName}</td>
+        <td>{item.price}</td>
+        <td>{item.quantity}px</td>
+        <td>
+        <motion.i whileTap={{scale : 1.2}}
+         onClick={deleteProduct}
+         class =" ri-delete-bin-line"
+         ></motion.i>
+         </td>
+      </tr>
+  );
+};
+ 
+export default Cart;
