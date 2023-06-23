@@ -114,7 +114,7 @@ const Home = () => {
             </div>
             <Clock />
 
-            <motion.button whileTap={{scale:1.2}} className="buy__btn store__btn"><Link to='/shop'>Visit Store</Link></motion.button>
+            <motion.button whileTap={{ scale: 1.2 }} className="buy__btn store__btn"><Link to='/shop'>Visit Store</Link></motion.button>
           </Col>
           <Col lg='6' md='12' className='text-end counter__img'>
             <img src={counterImg} alt="" />
@@ -123,27 +123,27 @@ const Home = () => {
       </Container>
     </section>
 
-  <section className="new__arrivals">
-    <Container>
-      <Row>
-        <Col lg='12' className='text-center'>
-          <h2 className="section__title">New Arrivals</h2>
-        </Col>
-        <ProductList data={mobileProducts} />
-        <ProductList data={wirelessProducts} />
-      </Row>
-    </Container>
-  </section>
-  <section className="popular__category">
-  <Container>
-      <Row>
-        <Col lg='12' className='text-center mb-5'>
-          <h2 className="section__title">Popular in Category</h2>
-        </Col>
-        <ProductList data={popularProducts} />
-      </Row>
-    </Container>
-  </section>
+    <section className="new__arrivals">
+      <Container>
+        <Row>
+          <Col lg='12' className='text-center'>
+            <h2 className="section__title">New Arrivals</h2>
+          </Col>
+          <ProductList data={mobileProducts} />
+          <ProductList data={wirelessProducts} />
+        </Row>
+      </Container>
+    </section>
+    <section className="popular__category">
+      <Container>
+        <Row>
+          <Col lg='12' className='text-center mb-5'>
+            <h2 className="section__title">Popular in Category</h2>
+          </Col>
+          <ProductList data={popularProducts} />
+        </Row>
+      </Container>
+    </section>
 
   </Helmet>;
 };

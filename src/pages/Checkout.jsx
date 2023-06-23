@@ -57,15 +57,15 @@ const Checkout = () => {
                 <h6>Subtotal : <span>${totalAmount}</span></h6>
 
                 <h6>
-                <span>Shipping: <br />
-                (Free Shipping)
-                </span>
-                <span>$0</span></h6>
-        
+                  <span>Shipping: <br />
+                    (Free Shipping)
+                  </span>
+                  <span>$0</span></h6>
+
                 <h4>Total Cost : <span>${totalAmount}</span></h4>
                 <button className="buy__btn ab auth__btn w-100">Place an order</button>
               </div>
-              
+
             </Col>
           </Row>
         </Container>
