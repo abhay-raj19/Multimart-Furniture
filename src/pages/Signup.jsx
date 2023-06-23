@@ -3,14 +3,70 @@ import Helmet from '../components/Helmet/Helmet';
 import { Col, Container, Form, FormGroup, Row } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import '../styles/signup.css'
+import '../styles/login.css'
+
+import { createUserWithEmailAndPassword,updateProfile } from "firebase/auth";
+import { ref , uploadBytesResumable ,getDownloadURL } from "firebase/storage";
+import { storage } from '../firebase.config.js';
+import { auth } from '../firebase.config.js'
+import { setDoc , doc } from 'firebase/firestore';
+import { db } from "../firebase.config.js";
+
+import { toast } from 'react-toastify';
+
 
 
 
 const Signup = () => {
-  const [username , setUsername] = useState('')
-  const [email,setEmail]  =  useState('')
-  const [password,setPassword] = useState('')
-  const [file,setFile] = useState('')
+  const [username , setUsername] = useState('');
+  const [email,setEmail]  =  useState('');
+  const [password,setPassword] = useState('');
+  const [file,setFile] = useState('');
+  const [loading, setLoading] = useState();
+
+  const signup = async(e) => {
+    e.preventDefault()
+    setLoading(true)
+
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+      );
+      const user = userCredential.user;
+
+      const storageRef = ref(storage, `images/${Date.now()+ username }`)
+      const uploadTask = uploadBytesResumable(storageRef, file)
+      
+      uploadTask.on(
+        (error) => {
+           toast.error(error.message);
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then(async(downloadURL)=> {
+          //Update user profile 
+            await updateProfile(user, {
+              displayName:username,
+              photoURL:downloadURL,
+            });
+            //store user data in firebase database
+            await setDoc(doc(db,"users",user.uid),{
+              uid: user.uid,
+              displayName : username,
+              email,
+              photoURL : downloadURL,
+            });
+          });
+      }
+      );
+      
+      console.log(user);
+      
+    } catch (error) {
+      toast.error("Something went wrong");      
+    }
+  }
 
   return <Helmet title='Signup'>
       <section>
@@ -18,7 +74,7 @@ const Signup = () => {
           <Row>
             <Col lg='6' className='m-auto text-center'>
               <h3 className="fw-bold mb-4">Signup</h3>
-              <Form className='auth__form'>
+              <Form className='auth__form' onSubmit={signup}>
 
               <FormGroup className='form__group' >
                 <input type="text" value={username} onChange={e => setUsername(e.target.value)} placeholder='UserName' id="" />
