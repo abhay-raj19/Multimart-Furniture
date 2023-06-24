@@ -101,6 +101,7 @@ const Signup = () => {
               <FormGroup className='form__group' >
                 <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder='Enter Your Password' id="" />
               </FormGroup>
+              
 
               <FormGroup className='shift-left' >
                 <input type="file" onChange={e => setFile(e.target.files[0])} />
