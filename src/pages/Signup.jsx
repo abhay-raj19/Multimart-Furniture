@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Helmet from '../components/Helmet/Helmet';
-import { Col, Container, Form, FormGroup, Row } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { Col, Container, Form, FormGroup, Row, Toast } from 'reactstrap';
+import { Link, useNavigate } from 'react-router-dom';
 import '../styles/signup.css'
 import '../styles/login.css'
 
@@ -17,12 +17,17 @@ import { toast } from 'react-toastify';
 
 
 
+
+
 const Signup = () => {
+  const currentDate = new Date();
+  
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [file, setFile] = useState('');
   const [loading, setLoading] = useState();
+  const navigate = useNavigate();
 
   const signup = async (e) => {
     e.preventDefault()
@@ -36,7 +41,7 @@ const Signup = () => {
       );
       const user = userCredential.user;
 
-      const storageRef = ref(storage, `images/${Date.now() + username}`)
+      const storageRef = ref(storage, `images/${currentDate.toDateString()+ " " + username}`)
       const uploadTask = uploadBytesResumable(storageRef, file)
 
       uploadTask.on(
@@ -50,6 +55,7 @@ const Signup = () => {
               displayName: username,
               photoURL: downloadURL,
             });
+
             //store user data in firebase database
             await setDoc(doc(db, "users", user.uid), {
               uid: user.uid,
@@ -62,8 +68,12 @@ const Signup = () => {
       );
 
       console.log(user);
+      setLoading(false);
+      toast.success("Account Created Sucessfully");
+      navigate('/login')
 
     } catch (error) {
+      setLoading(false)
       toast.error("Something went wrong");
     }
   }
@@ -72,7 +82,10 @@ const Signup = () => {
     <section>
       <Container>
         <Row>
-          <Col lg='6' className='m-auto text-center'>
+         {
+          loading ? ( <Col  lg='12' className='text-center'><h5 className='fw-bold'>Loading.....</h5></Col> 
+          ) : (
+             <Col lg='6' className='m-auto text-center'>
             <h3 className="fw-bold mb-4">Signup</h3>
             <Form className='auth__form' onSubmit={signup}>
 
@@ -83,6 +96,7 @@ const Signup = () => {
               <FormGroup className='form__group' >
                 <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder='Enter Your E-mail' id="" />
               </FormGroup>
+              
 
               <FormGroup className='form__group' >
                 <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder='Enter Your Password' id="" />
@@ -97,6 +111,7 @@ const Signup = () => {
 
             </Form>
           </Col>
+         )}
         </Row>
       </Container>
     </section>
