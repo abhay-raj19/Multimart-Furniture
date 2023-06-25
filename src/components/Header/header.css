@@ -96,11 +96,12 @@
     flex-direction: column;
     background: var(--card-bg-01);
     line-height: 30px;
-    display: block;                /* display: none; */
+    display:flex;                /* display: none; */
     cursor: pointer;
 }
 .show__profileActions {
-    display: block;
+    
+    display:flex;
 }
 
 

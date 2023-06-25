@@ -11,6 +11,10 @@ import userIcon from "../../assets/images/user-icon.png";
 import { Container, Row } from "reactstrap";
 import { useSelector } from "react-redux";
 import useAuth from "../../custom-hooks/useAuth";
+import { signOut } from "firebase/auth";
+import { auth } from "../../firebase.config";
+import { toast } from "react-toastify";
+ 
 
 const nav_links = [
   {
@@ -49,6 +53,14 @@ const Header = () => {
     });
   };
 
+  const logout = () => {
+    signOut(auth).then(() => {
+        toast.success('Logged Out')
+    }).catch(err =>{
+        toast.error(err.message)
+    })
+  }
+
   useEffect(() => {
     stickyHeaderFunc();
 
@@ -75,7 +87,7 @@ const Header = () => {
               </Link>
               <div>
                 <Link to="/home">
-                  <h1>Marketopolis</h1>
+                  <h1>MultiMart</h1>
                 </Link>
               </div>
             </div>
@@ -117,10 +129,10 @@ const Header = () => {
                   onClick={toggleProfileActions}
                 >
                   { currentUser ? (
-                    <span> Logout </span>
+                    <span onClick={logout} > Logout </span>
                   ) : (
-                    <div>
-                      <Link to="/signup">Signup</Link>
+                    <div className="d-flex align-items-center justify-content-center flex-column">
+                      <Link to="/signup">Signup </Link>
                       <Link to="/login">Login</Link>
                     </div>
                   )}
