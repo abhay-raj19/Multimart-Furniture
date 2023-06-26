@@ -118,7 +118,7 @@ const Header = () => {
               </span>
               <div className="profile">
                 <motion.img
-                  whileTap={{ scale: 1.5 }}
+                  whileTap={{ scale: 1.2 }}
                   src={currentUser ? currentUser.photoURL : userIcon}
                   alt=""
                   onClick={toggleProfileActions}
@@ -128,9 +128,9 @@ const Header = () => {
                   ref={profileActionRef}
                   onClick={toggleProfileActions}
                 >
-                  { currentUser ? (
-                    <span onClick={logout} > Logout </span>
-                  ) : (
+                  {
+                    currentUser ? ( <span onClick={logout} > Logout </span>)
+                  : (
                     <div className="d-flex align-items-center justify-content-center flex-column">
                       <Link to="/signup">Signup </Link>
                       <Link to="/login">Login</Link>
