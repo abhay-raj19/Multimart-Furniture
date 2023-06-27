@@ -15,10 +15,6 @@ import { db } from "../firebase.config.js";
 import { toast } from 'react-toastify';
 
 
-
-
-
-
 const Signup = () => {
   const currentDate = new Date();
   
@@ -90,16 +86,16 @@ const Signup = () => {
             <Form className='auth__form' onSubmit={signup}>
 
               <FormGroup className='form__group' >
-                <input type="text" value={username} onChange={e => setUsername(e.target.value)} placeholder='UserName' id="" />
+                <input type="text" value={username} onChange={e => setUsername(e.target.value)} placeholder='UserName' />
               </FormGroup>
 
               <FormGroup className='form__group' >
-                <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder='Enter Your E-mail' id="" />
+                <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder='Enter Your E-mail' />
               </FormGroup>
               
 
               <FormGroup className='form__group' >
-                <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder='Enter Your Password' id="" />
+                <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder='Enter Your Password'/>
               </FormGroup>
               
 
